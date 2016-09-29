@@ -1,0 +1,126 @@
+/* Firefox Reset */
+button::-moz-focus-inner {
+    border: none;
+}
+
+/* selector styles */
+div.selector {
+    display: inline-block;
+    position: relative;
+}
+
+select.selector-demo {
+    display: none;
+    position: relative;
+}
+
+div.selector-element {
+    display: inline-block;
+    position: relative;
+    width: 324px;
+    height: 32px;
+    background: white;
+    overflow: visible;
+}
+
+div.selector-element button.selector-selected {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: white;
+    outline: none;
+    color: black;
+    border: 1px solid black;
+    padding: 0 8px;
+    margin: 0;
+    font-size: .82em;
+    text-align: left;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    cursor: pointer;
+    z-index: 0;
+    transition: .1s ease-in-out;
+}
+
+div.selector-element button.selector-selected:hover {
+    background: #ebebeb;
+}
+
+div.selector-element button.selector-selected::after {
+    content: '';
+    display: block;
+    position: absolute;
+    height: 0;
+    width: 0;
+    border-top: 5px solid black;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: none;
+    right: 14px;
+    top: 13px;
+}
+
+div.selector-element div.selector-options {
+    display: none;
+    position: absolute;
+    top: 32px;
+    left: 0;
+    width: 100%;
+    height: auto;
+    max-height: 160px;
+    border: 1px solid black;
+    border-top: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    box-shadow: 0 2px 4px rgba(0,0,0,.33);
+    overflow: auto;
+    z-index: 1;
+}
+
+div.selector-element div.selector-options.opened {
+    display: inline-block;
+    position: absolute;
+    top: 32px;
+    left: 0;
+    width: 100%;
+    height: auto;
+    max-height: 160px;
+    border: 1px solid black;
+    border-top: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    box-shadow: 0 2px 4px rgba(0,0,0,.33);
+    overflow: auto;
+    z-index: 1;
+}
+
+div.selector-element div.selector-options button.selector-option {
+    display: inline-block;
+    width: 100%;
+    height: 32px;
+    background: white;
+    border: none;
+    border-bottom: 1px solid grey;
+    font-size: .82em;
+    color: black;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0 8px;
+    outline: none;
+    text-align: left;
+    cursor: pointer;
+    transition: .1s ease-in-out;
+}
+
+div.selector-element div.selector-options button.selector-option.selector-option-selected {
+    background: #f5f5f5;
+}
+
+div.selector-element div.selector-options button.selector-option:hover {
+    background: #ebebeb;
+}
