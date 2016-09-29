@@ -1,3 +1,3 @@
 # selector
 
-The simplest JS plugin for beutiful selects.
+The simplest JS plugin for beautiful selects.
