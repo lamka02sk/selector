@@ -1,9 +1,9 @@
 var i;
 
 // Close selector options when click anywhere
-document.querySelector("html").addEventListener("click", turnOffselector);
+document.querySelector("html").addEventListener("click", turnOffSelector);
 
-function turnOffselector(event) {
+function turnOffSelector(event) {
 
     if(event.target.classList.contains("selector-options") || event.target.classList.contains("selector-selected")) {
         return false;
@@ -19,12 +19,38 @@ function turnOffselector(event) {
 }
 
 // Open and close selector
-document.querySelector(".selector-selected").addEventListener("click", toggleSelect);
+var selectors = document.querySelectorAll(".selector-selected");
+
+for(i = 0; i < selectors.length; i++) {
+    selectors[i].addEventListener("click", toggleSelect);
+}
 
 function toggleSelect(event) {
 
+    // Get selector id
+    var parent = event.target.parentElement;
+
+    var selector = "#" + parent.id + " .selector-options";
+
+    // Close every selector options
+    var selectors = document.querySelectorAll(".selector-options");
+    for(i = 0; i < selectors.length; i++) {
+
+        // Get selector id
+        var parentI = selectors[i].parentElement;
+
+        if(parent.id === parentI.id) {
+            continue;
+        }
+
+        var selectorI = "#" + parentI.id + " .selector-options";
+
+        document.querySelector(selectorI).classList.remove("opened");
+
+    }
+
     // Toggle options list class
-    document.querySelector(".selector-options").classList.toggle("opened");
+    document.querySelector(selector).classList.toggle("opened");
 
     event.preventDefault();
 

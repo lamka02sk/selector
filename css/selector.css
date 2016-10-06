@@ -3,7 +3,7 @@ button::-moz-focus-inner {
     border: none;
 }
 
-/* selector styles */
+/* selector Styles */
 div.selector {
     display: inline-block;
     position: relative;
