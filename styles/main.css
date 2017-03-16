@@ -1,3 +1,91 @@
+div.selector-element {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  height: 32px;
+  font-family: sans-serif;
+  font-size: .83em;
+  color: #232323;
+  background-color: white; }
 
+div.selector-element div.selector-selected {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  cursor: pointer;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  line-height: 30px;
+  padding: 0 12px;
+  transition: .15s ease-in-out;
+  border: 1px solid #808080; }
+  div.selector-element div.selector-selected:hover {
+    background-color: #ebebeb; }
+  div.selector-element div.selector-selected:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 22px;
+    transform: translateY(-50%);
+    height: 0;
+    width: 0;
+    border-top: 5px solid silver;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent; }
+
+div.selector-element div.selector-selected p.selected-text {
+  display: inline-block;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding-right: 30px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap; }
+
+div.selector-element div.selector-options {
+  display: none;
+  position: absolute;
+  background-color: white;
+  top: 100%;
+  width: 100%;
+  height: auto;
+  max-height: 160px;
+  overflow: auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid grey;
+  border-top: none;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+  z-index: 1; }
+  div.selector-element div.selector-options.open {
+    display: block; }
+
+div.selector-element div.selector-options div.selector-option {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  height: 32px;
+  border-bottom: 1px solid silver;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0 12px;
+  line-height: 31px;
+  cursor: pointer;
+  transition: .15s ease-in-out; }
+  div.selector-element div.selector-options div.selector-option.option-selected {
+    background-color: #f5f5f5; }
+  div.selector-element div.selector-options div.selector-option:hover {
+    background-color: #ebebeb; }
+  div.selector-element div.selector-options div.selector-option:last-of-type {
+    border-bottom: none; }
 
 /*# sourceMappingURL=main.css.map */
