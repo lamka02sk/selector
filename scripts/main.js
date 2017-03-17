@@ -7,6 +7,7 @@ function Selector(parameters) {
     // Variables
     this.elements = {};
     this.currentElement = {};
+    this.currentInstance = {};
     this.elementsStructure = {};
 
     // Selector Default Settings
@@ -64,7 +65,7 @@ Selector.prototype.createInstance = function(element) {
     this.renderInstance();
 
     // Create events
-    //this.createEvents();
+    this.createEvents();
 
 };
 
@@ -116,6 +117,9 @@ Selector.prototype.renderInstance = function() {
     // Connect parts together
     parent.appendChild(selected);
     parent.appendChild(options);
+
+    // Save the instance
+    this.currentInstance = parent;
 
     // Show element in browser and hide original user defined
     this.currentElement.style.display = 'none';
@@ -208,4 +212,67 @@ Selector.prototype.renderOptions = function() {
 
     return options;
 
+};
+
+/**
+ * Selector createEvents Function
+ * Create user input events to get the instance to work
+ */
+Selector.prototype.createEvents = function() {
+
+    // Current instance variables and function aliases
+    let currentInstance = this.currentInstance;
+    let instanceSelected = this.currentInstance.querySelector('div.selector-selected');
+    let instanceOptions = this.currentInstance.querySelector('div.selector-options');
+
+    // Open / Close on selected button click
+    instanceSelected.onclick = function() {
+        currentInstance.classList.toggle('open');
+    };
+
+    // Change selected on click on option element
+    instanceOptions.onclick = function(clicked) {
+        this.changeSelectedOption(clicked);
+    }.bind(this);
+
+};
+
+/**
+ * Selector changeSelectedOption Function
+ * @param clicked
+ */
+Selector.prototype.changeSelectedOption = function(clicked) {
+
+    let target = clicked.target;
+    if(!target.firstElementChild)
+        target = target.parentNode;
+
+    let dataset = target.dataset;
+    let text = target.innerText;
+    let instanceParent = target.parentNode.parentNode;
+    let selected = instanceParent.querySelector('div.selector-selected');
+    let options = instanceParent.querySelector('div.selector-options');
+
+    for(let i in selected.dataset)
+        selected.removeAttribute('data-' + i);
+
+    for(let i in dataset)
+        selected.setAttribute('data-' + i, dataset[i]);
+
+    selected.querySelector('p').innerText = text;
+    options.querySelector('div.option-selected').classList.remove('option-selected');
+    target.classList.add('option-selected');
+
+    selected.click();
+
+};
+
+// Close Selectors on click outside
+document.onclick = function(clicked) {
+    let SelectorInstances = document.querySelectorAll('div.selector-element');
+    let target = clicked.target;
+    for(let i = 0; i < SelectorInstances.length; ++i) {
+        if(target !== SelectorInstances[i] && !SelectorInstances[i].contains(target))
+            SelectorInstances[i].classList.remove('open');
+    }
 };

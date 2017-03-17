@@ -70,9 +70,11 @@ div.selector-element div.selector-options {
   border-top: none;
   box-shadow: 0 2px 3px rgba(0,0,0,.2);
   z-index: 1;
-  &.open {
-    display: block;
-  }
+
+}
+
+div.selector-element.open div.selector-options {
+  display: block;
 }
 
 div.selector-element div.selector-options div.selector-option {
