@@ -7,12 +7,12 @@ The simplest vanilla JavaScript plugin for beautiful selects.
 - easy installation and initialization
 
 ## Usage
-####1. Include plugin source located in 'scripts/main.min.js'
+#### 1. Include plugin source located in 'scripts/main.min.js'
 ```html
 <script type="application/javascript" src="scripts/main.min.js"></script>
 ```
 
-####2. Initialize Selector plugin in your JS file.
+#### 2. Initialize Selector plugin in your JS file.
 Simply create a new instance of Selector class.
 ```javascript
 new Selector();
