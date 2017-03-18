@@ -8,7 +8,6 @@ function Selector(parameters) {
     this.elements = {};
     this.currentElement = {};
     this.currentInstance = {};
-    this.elementsStructure = {};
 
     // Selector Default Settings
     this.config = {
@@ -34,7 +33,7 @@ Selector.prototype.core = function() {
 
     // Create Selector elements for each instance element
     for(let i = 0; i < this.elements.length; ++i)
-        this.createInstance(this.elements[i]);
+        this.createInstance(this.elements[i], i);
 
 };
 
@@ -53,48 +52,16 @@ Selector.prototype.getElements = function() {
  * Selector createInstance Function
  * Create instance, events and render elements
  */
-Selector.prototype.createInstance = function(element) {
+Selector.prototype.createInstance = function(element, i) {
 
     // Save current element
     this.currentElement = element;
-
-    // Save instance content
-    this.saveContent();
 
     // Render instance elements
     this.renderInstance();
 
     // Create events
     this.createEvents();
-
-};
-
-/**
- * Selector saveContent Function
- * Stores user defined content and attributes for current element
- */
-Selector.prototype.saveContent = function() {
-
-    // Save element name
-    let element = this.currentElement;
-    let elementName = element.tagName.toLowerCase();
-    this.elementsStructure[elementName] = {};
-
-    // Save parent attributes
-    let attributes = element.attributes;
-    for(let i = 0; i < attributes.length; ++i)
-        this.elementsStructure[elementName][attributes[i].name] = attributes[i].value;
-
-    // Save children
-    for(let i = 0; i < element.childElementCount; ++i) {
-        let childElementName = element[i].tagName.toLowerCase();
-        this.elementsStructure[elementName][i] = {};
-        this.elementsStructure[elementName][i].tag = childElementName;
-        let childAttributes = element[i].attributes;
-        this.elementsStructure[elementName][i].text = element[i].text;
-        for(let j = 0; j < childAttributes.length; ++j)
-            this.elementsStructure[elementName][i][childAttributes[j].name] = childAttributes[j].value;
-    }
 
 };
 
@@ -136,7 +103,7 @@ Selector.prototype.renderParent = function() {
 
     let parent = document.createElement('div');
     parent.className = 'selector-element';
-    parent.dataset.reference = this.elementsStructure.select.name;
+    parent.dataset.reference = this.currentElement.name;
     return parent;
 
 };
@@ -177,30 +144,24 @@ Selector.prototype.renderOptions = function() {
 
         let option = document.createElement('div');
         option.className = 'selector-option';
-        let optionText;
 
-        for(let j in this.elementsStructure['select'][i]) {
+        let optionText = document.createElement('span');
+        optionText.className = 'option-text';
+        optionText.innerText = this.currentElement[i].innerText;
 
-            let valueIndex = j;
-            if(j == 'tag') continue;
+        for(let j = 0; j < this.currentElement[i].attributes.length; ++j) {
 
-            if(j == 'value')
-                j = 'data-value';
+            let attribute = this.currentElement[i].attributes[j];
+            if(attribute.name == 'value')
+                attribute.name = 'data-value';
 
-            if(j == 'selected' || j == 'disabled') {
-                this.elementsStructure['select'][i][valueIndex] = 'true';
-                option.className += ' option-' + j;
+            if(attribute.name == 'selected' || attribute.name == 'disabled') {
+                attribute.value = 'true';
+                option.className += ' option-' + attribute.name;
                 continue;
             }
 
-            if(j == 'text') {
-                optionText = document.createElement('span');
-                optionText.className = 'option-text';
-                optionText.innerText = this.elementsStructure['select'][i][valueIndex];
-                continue;
-            }
-
-            option.setAttribute(j, this.elementsStructure['select'][i][valueIndex]);
+            option.setAttribute(attribute.name, attribute.value);
 
         }
 
@@ -262,6 +223,17 @@ Selector.prototype.changeSelectedOption = function(clicked) {
     selected.querySelector('p').innerText = text;
     options.querySelector('div.option-selected').classList.remove('option-selected');
     target.classList.add('option-selected');
+
+    // Change value of default select element
+    let parentSelect = instanceParent.previousSibling;
+    console.log(parentSelect.tagName);
+    if(parentSelect.tagName !== 'SELECT')
+        parentSelect = document.querySelector('select[name="' + instanceParent.getAttribute('data-reference') + '"]');
+    let selectedNew = selected.getAttribute('data-item');
+    let selectOptions = parentSelect.querySelectorAll('option');
+    for(let i = 0; i < selectOptions.length; ++i)
+        selectOptions[i].removeAttribute('selected');
+    selectOptions[selectedNew].setAttribute('selected', 'true');
 
     selected.click();
 
