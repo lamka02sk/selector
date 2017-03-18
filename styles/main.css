@@ -56,7 +56,7 @@ div.selector-element div.selector-options {
   top: 100%;
   width: 100%;
   height: auto;
-  max-height: 160px;
+  max-height: 156px;
   overflow: auto;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -64,13 +64,16 @@ div.selector-element div.selector-options {
   border: 1px solid grey;
   border-top: none;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
-  z-index: 1; }
+  z-index: 1;
+  transition: .2s ease-in-out; }
+  div.selector-element div.selector-options.options-search {
+    max-height: 220px; }
 
 div.selector-element.open div.selector-options {
   display: block; }
 
 div.selector-element div.selector-options div.selector-option {
-  display: inline-block;
+  display: block;
   position: relative;
   width: 100%;
   height: 32px;
@@ -81,12 +84,51 @@ div.selector-element div.selector-options div.selector-option {
   padding: 0 12px;
   line-height: 31px;
   cursor: pointer;
+  overflow: hidden;
   transition: .15s ease-in-out; }
+  div.selector-element div.selector-options div.selector-option.hide {
+    height: 0;
+    border-bottom: none;
+    transition: .1s ease-in-out; }
   div.selector-element div.selector-options div.selector-option.option-selected {
     background-color: #f5f5f5; }
   div.selector-element div.selector-options div.selector-option:hover {
     background-color: #ebebeb; }
   div.selector-element div.selector-options div.selector-option:last-of-type {
     border-bottom: none; }
+  div.selector-element div.selector-options div.selector-option.option-disabled {
+    opacity: .6; }
+
+div.selector-element div.selector-options div.option-search {
+  display: block;
+  height: 32px;
+  line-height: 33px;
+  position: relative;
+  width: 100%;
+  border-bottom: 1px solid grey; }
+  div.selector-element div.selector-options div.option-search span {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-48%) !important;
+    height: 14px;
+    width: 14px;
+    cursor: pointer;
+    z-index: 1;
+    background: url("../assets/close.svg") center no-repeat;
+    background-size: 11px;
+    right: 12px; }
+
+div.selector-element div.selector-options div.option-search input {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  padding: 0 36px 0 36px;
+  font-family: sans-serif;
+  font-size: 1em;
+  color: #232323;
+  outline: none;
+  border: none;
+  background: url("../assets/search.svg") left 13px center no-repeat;
+  background-size: 13px; }
 
 /*# sourceMappingURL=main.css.map */

@@ -11,16 +11,33 @@ function Selector(parameters) {
 
     // Selector Default Settings
     this.config = {
-        selector: 'select.selector-instance'
+        'selector': 'select.selector-instance'
     };
 
     // Save given parameters
     this.parameters = parameters;
 
+    // Apply given parameters
+    this.applyParameters();
+
     // Run core
     this.core();
 
 }
+
+/**
+ * Selector applyParameters Function
+ * Save user defined parameters to config
+ */
+Selector.prototype.applyParameters = function() {
+
+    let allowedParameters = ['selector'];
+    for(let i in this.parameters) {
+        if(allowedParameters.indexOf(i) === -1) continue;
+        this.config[i] = this.parameters[i];
+    }
+
+};
 
 /**
  * Selector core Function
@@ -103,6 +120,8 @@ Selector.prototype.renderParent = function() {
 
     let parent = document.createElement('div');
     parent.className = 'selector-element';
+    if(this.currentElement.getAttribute('data-type'))
+        parent.dataset.type = this.currentElement.getAttribute('data-type');
     parent.dataset.reference = this.currentElement.name;
     return parent;
 
@@ -140,6 +159,13 @@ Selector.prototype.renderOptions = function() {
     // Append each option to options
     let options = document.createElement('div');
     options.className = 'selector-options';
+
+    // Check if instance is search type
+    if(this.currentElement.getAttribute('data-type') == 'search-selector') {
+        options.appendChild(this.renderSearchOption());
+        options.classList.add('options-search');
+    }
+
     for(let i = 0; i < this.currentElement.childElementCount; ++i) {
 
         let option = document.createElement('div');
@@ -176,6 +202,51 @@ Selector.prototype.renderOptions = function() {
 };
 
 /**
+ * Selector renderSearchOption Function
+ * Create search element and its events
+ */
+Selector.prototype.renderSearchOption = function() {
+
+    // Create elements
+    let searchBox = document.createElement('div');
+    searchBox.classList.add('option-search');
+    let psuedo = document.createElement('span');
+    let input = document.createElement('input');
+    input.setAttribute('type', 'search');
+    input.classList.add('search-input');
+    input.setAttribute('placeholder', 'Find option');
+    input.setAttribute('data-placeholder', 'SELECTOR_SEARCH');
+    searchBox.appendChild(psuedo);
+    searchBox.appendChild(input);
+
+    // Create events
+    let eventList = ['onfocus', 'onblur', 'keyup', 'click'];
+    for(let event in eventList) {
+        event = eventList[event];
+        searchBox.addEventListener(event, function() {
+            let options = this.parentNode.querySelectorAll('div.selector-option');
+            let inputContent = this.querySelector('input').value.toLowerCase().trim();
+            for(let i = 0; i < options.length; ++i) {
+                let option = options[i];
+                option.classList.remove('hide');
+                let value = option.innerText.toLowerCase().trim();
+                if(!value.includes(inputContent))
+                    option.classList.add('hide');
+            }
+        });
+    }
+
+    searchBox.querySelector('span').onclick = function() {
+        input.value = '';
+        input.click();
+        input.focus();
+    };
+
+    return searchBox;
+
+};
+
+/**
  * Selector createEvents Function
  * Create user input events to get the instance to work
  */
@@ -185,16 +256,42 @@ Selector.prototype.createEvents = function() {
     let currentInstance = this.currentInstance;
     let instanceSelected = this.currentInstance.querySelector('div.selector-selected');
     let instanceOptions = this.currentInstance.querySelector('div.selector-options');
+    let isSearch = (currentInstance.getAttribute('data-type') == 'search-selector');
 
     // Open / Close on selected button click
     instanceSelected.onclick = function() {
         currentInstance.classList.toggle('open');
+        if(isSearch) {
+            let input = instanceOptions.querySelector('input');
+            input.value = '';
+            input.click();
+            input.focus();
+        }
     };
 
     // Change selected on click on option element
     instanceOptions.onclick = function(clicked) {
         this.changeSelectedOption(clicked);
     }.bind(this);
+
+    if(isSearch) {
+        let instanceInput = instanceOptions.querySelector('div.option-search input');
+        instanceInput.onfocus = function() {
+            this.onkeyup = function(key) {
+                if(key.keyCode !== 13) return false;
+                let options = instanceInput.parentNode.parentNode.querySelectorAll('div.selector-option');
+                let counter = 0;
+                let option;
+                for(let i = 0; i < options.length; ++i) {
+                    if(options[i].classList.contains('hide')) continue;
+                    option = options[i];
+                    ++counter;
+                }
+                if(counter == 1)
+                    option.click();
+            }.bind(instanceInput);
+        };
+    }
 
 };
 
@@ -207,6 +304,7 @@ Selector.prototype.changeSelectedOption = function(clicked) {
     let target = clicked.target;
     if(!target.firstElementChild)
         target = target.parentNode;
+    if(target.classList.contains('option-search')) return;
 
     let dataset = target.dataset;
     let text = target.innerText;
@@ -226,7 +324,6 @@ Selector.prototype.changeSelectedOption = function(clicked) {
 
     // Change value of default select element
     let parentSelect = instanceParent.previousSibling;
-    console.log(parentSelect.tagName);
     if(parentSelect.tagName !== 'SELECT')
         parentSelect = document.querySelector('select[name="' + instanceParent.getAttribute('data-reference') + '"]');
     let selectedNew = selected.getAttribute('data-item');
