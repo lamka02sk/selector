@@ -45,7 +45,25 @@
     </select>
 
     <script>
-        new Selector();
+        new Selector({
+            callback: function(elements) {
+                console.log('selector is ready! and this is the list of active elements: ');
+                console.log(elements);
+            },
+            onOpen: function(instance) {
+                console.log('selector opened! and this is the opened instance: ');
+                console.log(instance);
+            },
+            onClose: function(instance) {
+                console.log('selector closed! and this is the closed instance: ');
+                console.log(instance);
+            },
+            onSelect: function(instance, option) {
+                console.log('selector option changed! and this is the new selected instance and option: ');
+                console.log(instance);
+                console.log(option);
+            }
+        });
     </script>
 
 </body>
