@@ -23,6 +23,10 @@ function Selector(parameters) {
     // Run core
     this.core();
 
+    // Callback
+    if("callback" in this.config)
+        this.config.callback(this.elements);
+
 }
 
 /**
@@ -31,7 +35,7 @@ function Selector(parameters) {
  */
 Selector.prototype.applyParameters = function() {
 
-    let allowedParameters = ['selector'];
+    let allowedParameters = ['selector', 'callback', 'onOpen', 'onClose', 'onSelect'];
     for(let i in this.parameters) {
         if(allowedParameters.indexOf(i) === -1) continue;
         this.config[i] = this.parameters[i];
@@ -267,11 +271,19 @@ Selector.prototype.createEvents = function() {
             input.click();
             input.focus();
         }
-    };
+        if("onOpen" in this.config && currentInstance.classList.contains('open'))
+            this.config.onOpen(currentInstance);
+        else if("onClose" in this.config)
+            this.config.onClose(currentInstance);
+    }.bind(this);
 
     // Change selected on click on option element
     instanceOptions.onclick = function(clicked) {
+        if(!clicked.target.classList.contains('selector-option') && !clicked.target.parentNode.classList.contains('selector-option'))
+            return;
         this.changeSelectedOption(clicked);
+        if("onSelect" in this.config)
+            this.config.onSelect(currentInstance, clicked.target);
     }.bind(this);
 
     if(isSearch) {
