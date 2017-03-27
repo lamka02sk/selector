@@ -350,6 +350,22 @@ Selector.prototype.changeSelectedOption = function(clicked) {
 
 };
 
+/**
+ * Selector destroy Function
+ * Destroy selector instances and show the default select element
+ */
+Selector.prototype.destroy = function() {
+
+    let elementsLength = this.elements.length;
+    for(let i = 0; i < elementsLength; ++i) {
+        let selectName = this.elements[i].getAttribute('name');
+        this.elements[i].style.display = 'block';
+        let instanceElement = document.querySelector('div[data-reference="' + selectName + '"]');
+        instanceElement.parentNode.removeChild(instanceElement);
+    }
+    
+};
+
 // Close Selectors on click outside
 document.onclick = function(clicked) {
     let SelectorInstances = document.querySelectorAll('div.selector-element');

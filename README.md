@@ -74,6 +74,18 @@ new Selector({
 });
 ```
 
+### 3. Selector Methods
+#### 3.1 destroy() - Destroy instance
+Method `destroy()` destroys all elements of current instance to display the classic select elements defined by user.
+For example: 
+```javascript
+// Create the Selector instance
+let selectorInstance = new Selector();
+
+// Destroy the Selector instance
+selectorInstance.destroy();
+```
+
 **For more examples, see index.html file.**
 
 *Note: Work in progress. May contain bugs. If you'll find any, let me know!*
