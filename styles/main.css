@@ -85,11 +85,9 @@ div.selector-element div.selector-options div.selector-option {
   line-height: 31px;
   cursor: pointer;
   overflow: hidden;
-  transition: .15s ease-in-out; }
+  transition: background .15s ease-in-out; }
   div.selector-element div.selector-options div.selector-option.hide {
-    height: 0;
-    border-bottom: none;
-    transition: .1s ease-in-out; }
+    display: none; }
   div.selector-element div.selector-options div.selector-option.option-selected {
     background-color: #f5f5f5; }
   div.selector-element div.selector-options div.selector-option:hover {

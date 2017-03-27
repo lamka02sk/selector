@@ -224,18 +224,20 @@ Selector.prototype.renderSearchOption = function() {
     searchBox.appendChild(input);
 
     // Create events
-    let eventList = ['onfocus', 'onblur', 'keyup', 'click'];
+    let eventList = ['onfocus', 'keyup', 'click'];
     for(let event in eventList) {
         event = eventList[event];
         searchBox.addEventListener(event, function() {
             let options = this.parentNode.querySelectorAll('div.selector-option');
             let inputContent = this.querySelector('input').value.toLowerCase().trim();
-            for(let i = 0; i < options.length; ++i) {
-                let option = options[i];
-                option.classList.remove('hide');
-                let value = option.innerText.toLowerCase().trim();
+            let optionsLength = options.length;
+            for(let i = 0; i < optionsLength; ++i) {
+                let value = options[i].innerText.toLowerCase();
                 if(!value.includes(inputContent))
-                    option.classList.add('hide');
+                    options[i].classList.add('hide');
+                else
+                    options[i].classList.remove('hide');
+
             }
         });
     }
@@ -346,6 +348,22 @@ Selector.prototype.changeSelectedOption = function(clicked) {
 
     selected.click();
 
+};
+
+/**
+ * Selector destroy Function
+ * Destroy selector instances and show the default select element
+ */
+Selector.prototype.destroy = function() {
+
+    let elementsLength = this.elements.length;
+    for(let i = 0; i < elementsLength; ++i) {
+        let selectName = this.elements[i].getAttribute('name');
+        this.elements[i].style.display = 'block';
+        let instanceElement = document.querySelector('div[data-reference="' + selectName + '"]');
+        instanceElement.parentNode.removeChild(instanceElement);
+    }
+    
 };
 
 // Close Selectors on click outside
