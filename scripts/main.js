@@ -127,6 +127,7 @@ Selector.prototype.renderParent = function() {
     if(this.currentElement.getAttribute('data-type'))
         parent.dataset.type = this.currentElement.getAttribute('data-type');
     parent.dataset.reference = this.currentElement.name;
+    parent.setAttribute('id', this.currentElement.getAttribute('id'));
     return parent;
 
 };
@@ -363,7 +364,7 @@ Selector.prototype.destroy = function() {
         let instanceElement = document.querySelector('div[data-reference="' + selectName + '"]');
         instanceElement.parentNode.removeChild(instanceElement);
     }
-    
+
 };
 
 // Close Selectors on click outside
