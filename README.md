@@ -88,4 +88,4 @@ selectorInstance.destroy();
 
 **For more examples, see index.html file.**
 
-*Note: Work in progress. May contain bugs. If you'll find any, let me know!*
+*Note: Still in beta. May contain bugs. Probably won't be updated in favor of new version.*
