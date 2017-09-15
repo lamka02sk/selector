@@ -51,6 +51,15 @@ module.exports = {
                     { loader: "sass-loader" }
                 ]
 
+            },
+
+            {
+                // SVG
+                test: /\.svg$/,
+                use: {
+                    loader: 'svg-url-loader',
+                    options: {}
+                }
             }
 
         ]

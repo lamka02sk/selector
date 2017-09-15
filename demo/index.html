@@ -13,7 +13,7 @@
 
     <h1>Selector demo selects</h1>
 
-    <!--<section id="basic-selector">
+    <section id="basic-selector">
 
         <h2>Basic selector</h2>
 
@@ -27,13 +27,13 @@
 
         </select>
 
-    </section>-->
+    </section>
 
     <section id="group-selector">
 
         <h2>Group selector</h2>
 
-        <select name="basic-select" id="groupSelect" data-type="find"   >
+        <select name="group-select" id="groupSelect" data-type="search">
 
             <optgroup label="Options Group 1">
                 <option value="0">Option 1</option>
@@ -47,11 +47,29 @@
             <optgroup label="Options Group 2">
                 <option value="6">Option 7</option>
                 <option value="7">Option 8</option>
+                <option value="8">Option 9</option>
+                <option value="9">Option 10</option>
+                <option value="10">Option 11</option>
+
             </optgroup>
 
         </select>
 
     </section>
+
+    <script>
+
+        for(let i = 0; i < 50; ++i) {
+
+            let option = document.createElement('option');
+            option.value = i * i * i * i;
+            option.innerText = i * i * i * i;
+
+            document.querySelector('[label="Options Group 2"]').appendChild(option);
+
+        }
+
+    </script>
 
     <!-- Selector assets -->
     <script src="../dist/bundle.js" type="application/javascript"></script>

@@ -20,6 +20,12 @@ window.Selector = (function() {
 
         init(settings);
 
+        return {
+
+            destroy: Core.destroy
+
+        }
+
     };
 
 })();

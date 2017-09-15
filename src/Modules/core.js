@@ -1,5 +1,6 @@
 import Settings from '../Modules/settings';
 import Instance from '../Modules/instance';
+import Events from '../Modules/events';
 
 export default {
 
@@ -24,7 +25,7 @@ export default {
 
     render() {
 
-        Settings.get('element').forEach(element => {
+        Settings.data.element.forEach(element => {
 
             if(!this.checkElement(element))
                 return false;
@@ -32,6 +33,8 @@ export default {
             Instance.constructor(element);
 
         });
+
+        Events.close();
 
     },
 
@@ -41,6 +44,29 @@ export default {
             return false;
 
         return (element.tagName === 'SELECT');
+
+    },
+
+    destroy() {
+
+        let settings = Settings.data;
+
+        settings.beforeDestroy
+            ? settings.beforeDestroy()
+            : function() {};
+
+        settings.element.forEach(element => {
+
+            let parent = element.parentNode;
+            parent.removeChild(parent.querySelector('[data-reference="' + element.name + '"]'));
+
+            element.style.display = '';
+
+        });
+
+        settings.destroyed
+            ? settings.destroyed()
+            : function() {};
 
     }
 

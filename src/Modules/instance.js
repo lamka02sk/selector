@@ -10,8 +10,6 @@ export default {
     optionTemplate: undefined,
     filterTemplate: undefined,
 
-    _instances: [],
-
     constructor(element) {
 
         this.element = element;
@@ -107,7 +105,7 @@ export default {
     createOptionElement() {
 
         this.optionTemplate = this.createElement('div', {
-            'class': 'selector-option',
+            'class': 'selector-option show',
             'data-item': ''
         });
 

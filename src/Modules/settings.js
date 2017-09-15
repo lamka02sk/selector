@@ -3,34 +3,34 @@ export default {
     data: {
 
         // v2.0
-        selector: null,
-        callback: undefined,
-        onOpen: undefined,
-        onClose: undefined,
-        onSelect: undefined,
+        selector: null,             // DONE
+        callback: null,             // DONE
+        onOpen: null,               // DONE
+        onClose: null,              // DONE
+        onSelect: null,             // DONE
+        destroy: null,              // DONE
 
         // v3.0
         element: null,              // Alongside "selector"     DONE
-        created: undefined,         // Alongside "callback"
-        opened: undefined,          // Alongside "onOpen"
-        closed: undefined,          // Alongside "onClose"
-        selected: undefined,        // Alongside "onSelect"
+        created: null,              // Alongside "callback"     DONE
+        opened: null,               // Alongside "onOpen"       DONE
+        closed: null,               // Alongside "onClose"      DONE
+        selected: null,             // Alongside "onSelect"     DONE
 
-        beforeCreate: undefined,
-        beforeSelect: undefined,
-        beforeChange: undefined,
-        changed: undefined,
-        beforeDestroy: undefined,
-        destroyed: undefined,
+        beforeCreate: null,         // DONE
+        beforeSelect: null,         // DONE
+        //beforeChange: undefined,
+        //changed: undefined,
+        beforeDestroy: null,        // DONE
+        destroyed: null,            // DONE
 
         label: null,                // DONE
         type: null,                 // DONE
-        identifier: null,
-        cover: false,
-        disabled: false,
-        relative: false,
-        watch: true,
-        animations: 'default'
+        //identifier: null,
+        //cover: false,
+        //disabled: false,
+        //relative: false,
+        //watch: true
 
     },
 
