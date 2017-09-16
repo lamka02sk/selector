@@ -17,13 +17,45 @@
 
         <h2>Basic selector</h2>
 
-        <select name="basic-select" id="basicSelect">
+        <select name="basic-select" id="basicSelect" data-label="Basic">
 
-            <option value="0">Option 1</option>
-            <option value="1" selected>Option 2</option>
+            <option value="0" selected>Option 1</option>
+            <option value="1">Option 2</option>
+            <option value="2">Option 3</option>
+            <option value="3">Option 4</option>
+            <option value="4">Option 5</option>
+
+        </select>
+
+    </section>
+
+    <section id="disabled-options">
+
+        <h2>Disabled options</h2>
+
+        <select name="options-disabled-select" id="disabledOptions" data-label="Disabled options">
+
+            <option value="0" selected>Option 1</option>
+            <option value="1" disabled>Option 2</option>
             <option value="2">Option 3</option>
             <option value="3">Option 4</option>
             <option value="4" disabled>Option 5</option>
+
+        </select>
+
+    </section>
+
+    <section id="disabled-selector">
+
+        <h2>Disabled selector</h2>
+
+        <select name="disabled-select" id="disabledSelect" disabled data-label="Disabled">
+
+            <option value="0" selected>Option 1</option>
+            <option value="1">Option 2</option>
+            <option value="2">Option 3</option>
+            <option value="3">Option 4</option>
+            <option value="4">Option 5</option>
 
         </select>
 
@@ -33,14 +65,14 @@
 
         <h2>Group selector</h2>
 
-        <select name="group-select" id="groupSelect" data-type="search">
+        <select name="group-select" id="groupSelect">
 
             <optgroup label="Options Group 1">
-                <option value="0">Option 1</option>
+                <option value="0" selected>Option 1</option>
                 <option value="1">Option 2</option>
                 <option value="2">Option 3</option>
                 <option value="3">Option 4</option>
-                <option value="4" selected>Option 5</option>
+                <option value="4">Option 5</option>
                 <option value="5">Option 6</option>
             </optgroup>
 
@@ -49,27 +81,92 @@
                 <option value="7">Option 8</option>
                 <option value="8">Option 9</option>
                 <option value="9">Option 10</option>
-                <option value="10">Option 11</option>
+            </optgroup>
 
+            <optgroup label="Options Group 3">
+                <option value="10">Option 11</option>
+                <option value="11">Option 12</option>
             </optgroup>
 
         </select>
 
     </section>
 
-    <script>
+    <section id="mixed-selector">
 
-        for(let i = 0; i < 50; ++i) {
+        <h2>Mixed (non-group / group) selector</h2>
 
-            let option = document.createElement('option');
-            option.value = i * i * i * i;
-            option.innerText = i * i * i * i;
+        <select name="mixed-select" id="mixedSelect">
 
-            document.querySelector('[label="Options Group 2"]').appendChild(option);
+            <option value="0" selected>Option 1</option>
+            <option value="1">Option 2</option>
+            <option value="2">Option 3</option>
 
-        }
+            <optgroup label="Options Group 2">
+                <option value="3">Option 4</option>
+                <option value="4">Option 5</option>
+                <option value="5">Option 6</option>
+                <option value="6">Option 7</option>
+                <option value="7">Option 8</option>
+            </optgroup>
 
-    </script>
+            <option value="8">Option 9</option>
+
+            <optgroup label="Options Group 3">
+                <option value="9">Option 10</option>
+                <option value="10">Option 11</option>
+            </optgroup>
+
+        </select>
+
+    </section>
+
+    <section id="group-disabled-selector">
+
+        <h2>Groups disabled</h2>
+
+        <select name="group-disabled-select" id="groupDisabledSelect">
+
+            <optgroup label="Options Group 1" disabled>
+                <option value="0" selected>Option 1</option>
+                <option value="1">Option 2</option>
+                <option value="2">Option 3</option>
+                <option value="3">Option 4</option>
+                <option value="4">Option 5</option>
+                <option value="5">Option 6</option>
+            </optgroup>
+
+            <optgroup label="Options Group 2">
+                <option value="6">Option 7</option>
+                <option value="7">Option 8</option>
+                <option value="8">Option 9</option>
+                <option value="9">Option 10</option>
+            </optgroup>
+
+            <optgroup label="Options Group 3" disabled>
+                <option value="10">Option 11</option>
+                <option value="11">Option 12</option>
+            </optgroup>
+
+        </select>
+
+    </section>
+
+    <section id="filter-selector">
+
+        <h2>Filter selector</h2>
+
+        <select name="filter-select" id="filterSelect" data-label="Filter options" data-type="find">
+
+            <option value="0" selected>Lorem</option>
+            <option value="1">Ipsum</option>
+            <option value="2">Dolor</option>
+            <option value="3">Sit</option>
+            <option value="4">Amet</option>
+
+        </select>
+
+    </section>
 
     <!-- Selector assets -->
     <script src="../dist/bundle.js" type="application/javascript"></script>
@@ -77,8 +174,7 @@
     <script>
 
         new Selector({
-            element: 'select',
-            label: 'Lorem ipsum dolor sit amet, lorem dolor amet sit'
+            element: 'select'
         });
 
     </script>

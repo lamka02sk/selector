@@ -22,8 +22,12 @@ export default {
 
         const data = Settings.data;
         const filter = Instance.isFilterType();
+        const disabled = parent.matches('[data-disabled]');
 
         parent.querySelector('.selector-selected').addEventListener('click', () => {
+
+            if(disabled)
+                return false;
 
             options.classList.toggle('visible');
 
@@ -129,7 +133,7 @@ export default {
                 if(!target.matches(selector))
                     target = target.parentNode;
 
-                if(target.dataset.disabled || target.dataset.selected)
+                if(target.dataset.disabled || target.dataset.selected || target.parentNode.matches('[data-disabled]'))
                     return false;
 
                 let selected = parent.querySelector('[data-selected]');

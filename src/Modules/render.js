@@ -114,8 +114,10 @@ export default class Render {
 
         let selected = this._render.querySelector('.selector-selected');
 
-        if(!!Settings.get('label'))
+        if(Settings.get('label'))
             selected.children[0].innerText = Settings.get('label');
+        else if(this._element.dataset.label)
+            selected.children[0].innerText = this._element.dataset.label;
 
         else {
 

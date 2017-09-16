@@ -62,6 +62,7 @@ div.selector-element
     overflow: auto
     z-index: 99
     border: 1px solid silver
+    background: white
     box-shadow: 0 2px 4px rgba(0,0,0,.1)
     border-bottom:
       left-radius: 3px
@@ -111,6 +112,7 @@ div.selector-element
       position: relative
       float: left
       width: 100%
+      border-bottom: 3px solid silver
 
       span.group-text
         display: inline-block
@@ -131,6 +133,14 @@ div.selector-element
         white-space: nowrap
         text-overflow: ellipsis
         z-index: 1
+
+      &[data-disabled]
+        opacity: .6
+        cursor: not-allowed
+
+        div.selector-option
+          opacity: .6
+          cursor: not-allowed
 
     div.selector-option
       position: relative
