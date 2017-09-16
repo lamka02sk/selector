@@ -1,5 +1,5 @@
 {
-  "name": "selector",
+  "name": "selector3",
   "version": "3.0.0",
   "description": "The simplest pure JS plugin for beautiful selects",
   "main": "demo.html",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/lamka02sk/selector/tree/v3.0"
+    "url": "https://github.com/lamka02sk/selector"
   },
   "keywords": [
     "javascript",
