@@ -14,12 +14,17 @@ export default {
     prepareElements() {
 
         let element = Settings.get('element');
-        element = document.querySelectorAll(element);
 
-        if(element.length === 0)
-            throw new DOMException;
-        else
-            Settings.set('element', element);
+        if(typeof element === 'string') {
+
+            element = document.querySelectorAll(element);
+
+            if(element.length === 0)
+                throw new DOMException;
+            else
+                Settings.set('element', element);
+
+        }
 
     },
 

@@ -1,8 +1,8 @@
 {
   "name": "selector3",
-  "version": "3.0.4",
+  "version": "3.0.5",
   "description": "The simplest pure JS plugin for beautiful selects",
-  "main": "demo.html",
+  "main": "./dist/bundle.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack -p",
