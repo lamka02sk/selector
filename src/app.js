@@ -1,7 +1,7 @@
 import Settings from '../src/Modules/settings';
 import Core from '../src/Modules/core';
 
-window.Selector = (function() {
+module.exports = (function() {
 
     /**
      * Private

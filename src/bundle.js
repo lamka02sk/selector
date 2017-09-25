@@ -1,2 +1,2 @@
-import './app';
 import './theme';
+module.exports = require('./app');
