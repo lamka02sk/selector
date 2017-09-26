@@ -1,31 +1,19 @@
 import Settings from '../src/Modules/settings';
 import Core from '../src/Modules/core';
 
-module.exports = (function() {
+module.exports = class {
 
-    /**
-     * Private
-     */
-    function init(settings) {
+    constructor(settings) {
 
-        Settings.save(settings);
-        Core.constructor();
+        this.Settings = new Settings(settings);
+        Core.constructor(this.Settings);
 
     }
 
-    /**
-     * Public
-     */
-    return function(settings) {
+    destroy() {
 
-        init(settings);
+        Core.destroy();
 
-        return {
+    }
 
-            destroy: Core.destroy
-
-        }
-
-    };
-
-})();
+};

@@ -1,11 +1,11 @@
-import Settings from '../Modules/settings';
 import Instance from '../Modules/instance';
 import Events from '../Modules/events';
 
 export default {
 
-    constructor() {
+    constructor(settings) {
 
+        this.Settings = settings;
         this.prepareElements();
         this.render();
 
@@ -13,7 +13,7 @@ export default {
 
     prepareElements() {
 
-        let element = Settings.get('element');
+        let element = this.Settings.data.element;
 
         if(typeof element === 'string') {
 
@@ -22,7 +22,7 @@ export default {
             if(element.length === 0)
                 throw new DOMException;
             else
-                Settings.set('element', element);
+                this.Settings.set('element', element);
 
         }
 
@@ -30,16 +30,16 @@ export default {
 
     render() {
 
-        Settings.data.element.forEach(element => {
+        this.Settings.data.element.forEach(element => {
 
             if(!this.checkElement(element))
                 return false;
 
-            Instance.constructor(element);
+            Instance.constructor(element, this.Settings);
 
         });
 
-        Events.close();
+        Events.closeSelector();
 
     },
 
@@ -54,7 +54,7 @@ export default {
 
     destroy() {
 
-        let settings = Settings.data;
+        let settings = this.Settings.data;
 
         settings.beforeDestroy
             ? settings.beforeDestroy()

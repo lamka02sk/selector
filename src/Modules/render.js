@@ -1,11 +1,12 @@
 import Instance from '../Modules/instance';
-import Settings from '../Modules/settings';
 import Events from '../Modules/events';
 
 export default class Render {
 
-    constructor(element) {
+    constructor(element, settings) {
 
+        this.Settings = settings;
+        this.Events = new Events(settings);
         this._element = element;
         this.hideOrigin();
 
@@ -25,7 +26,7 @@ export default class Render {
 
         template.id = this._element.id;
         template.dataset.reference = this._element.name;
-        template.dataset.type = Settings.get('type') || this._element.dataset.type || 'default';
+        template.dataset.type = this.Settings.type || this._element.dataset.type || 'default';
         this._element.disabled ? template.dataset.disabled = true : '';
 
         this._render = template;
@@ -37,13 +38,13 @@ export default class Render {
         let result;
         let options = this._render.querySelector('.selector-options');
 
-        Events.showOptions(options, this._render);
+        this.Events.showOptions(options, this._render);
 
         if(Instance.isFilterType()) {
 
             const filterRender = this.renderSearch();
             options.appendChild(filterRender);
-            Events.filterOptions(filterRender, this._render);
+            this.Events.filterOptions(filterRender, this._render);
 
         }
 
@@ -64,9 +65,9 @@ export default class Render {
         });
 
         if(Instance.isFilterType())
-            Events.createIndex(options);
+            this.Events.createIndex(options);
 
-        Events.select(this._render);
+        this.Events.select(this._render);
 
     }
 
@@ -114,8 +115,8 @@ export default class Render {
 
         let selected = this._render.querySelector('.selector-selected');
 
-        if(Settings.get('label'))
-            selected.children[0].innerText = Settings.get('label');
+        if(this.Settings.label)
+            selected.children[0].innerText = this.Settings.label;
         else if(this._element.dataset.label)
             selected.children[0].innerText = this._element.dataset.label;
 
@@ -141,7 +142,7 @@ export default class Render {
 
     show() {
 
-        const data = Settings.data;
+        const data = this.Settings.data;
 
         data.beforeCreate
             ? data.beforeCreate()

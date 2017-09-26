@@ -1,9 +1,14 @@
-import Settings from '../Modules/settings';
 import Instance from '../Modules/instance';
 
-export default {
+export default class {
 
-    close() {
+    constructor(settings) {
+
+        this.Settings = settings;
+
+    }
+
+    static closeSelector() {
 
         document.addEventListener('click', event => {
 
@@ -16,11 +21,11 @@ export default {
 
         });
 
-    },
+    }
 
     showOptions(options, parent) {
 
-        const data = Settings.data;
+        const data = this.Settings.data;
         const filter = Instance.isFilterType();
         const disabled = parent.matches('[data-disabled]');
 
@@ -55,7 +60,7 @@ export default {
 
         });
 
-    },
+    }
 
     clearFilter(button, input) {
         
@@ -64,7 +69,7 @@ export default {
             input.oninput();
         });
 
-    },
+    }
 
     filterOptions(filter, parent) {
 
@@ -105,7 +110,7 @@ export default {
 
         };
 
-    },
+    }
 
     createIndex(options) {
 
@@ -115,12 +120,12 @@ export default {
 
         options.dataset.index = JSON.stringify(index);
 
-    },
+    }
 
     select(parent) {
 
         let current = parent.querySelector('.selector-selected');
-        const settings = Settings.data;
+        const settings = this.Settings.data;
         let origin = document.querySelector('select[name="' + parent.dataset.reference + '"]');
 
         parent.querySelector('.selector-options').addEventListener('click', event => {

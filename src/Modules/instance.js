@@ -1,5 +1,5 @@
 import Render from '../Modules/render';
-import Settings from '../Modules/settings';
+import Events from '../Modules/events';
 
 export default {
 
@@ -10,12 +10,13 @@ export default {
     optionTemplate: undefined,
     filterTemplate: undefined,
 
-    constructor(element) {
+    constructor(element, settings) {
 
+        this.Settings = settings;
         this.element = element;
         this.createElements();
 
-        let renderer = new Render(element);
+        let renderer = new Render(element, settings);
         renderer.renderParent();
         renderer.renderContent();
         renderer.renderSelected();
@@ -25,7 +26,7 @@ export default {
 
     isFilterType() {
 
-        return (Settings.get('type') === 'filter' || (this.element.getAttribute('data-type') || '').match(/(search)|(find)/));
+        return (this.Settings.type === 'filter' || (this.element.getAttribute('data-type') || '').match(/(search)|(find)/));
 
     },
 
