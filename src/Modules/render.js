@@ -120,21 +120,17 @@ export default class Render {
         else if(this._element.dataset.label)
             selected.children[0].innerText = this._element.dataset.label;
 
-        else {
+        let selectedOption = this._element.querySelector('[selected]');
 
-            let selectedOption = this._element.querySelector('[selected]');
+        if(selectedOption) {
 
-            if(selectedOption) {
+            selected.dataset.item = selectedOption.value;
+            selected.children[0].innerText = selectedOption.innerText;
 
-                selected.dataset.item = selectedOption.value;
-                selected.children[0].innerText = selectedOption.innerText;
+        } else {
 
-            } else {
-
-                selected.dataset.item = undefined;
-                selected.children[0].innerText = '---';
-
-            }
+            selected.dataset.item = undefined;
+            selected.children[0].innerText = '---';
 
         }
 

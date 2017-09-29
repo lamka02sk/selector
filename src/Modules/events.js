@@ -142,13 +142,15 @@ export default class {
                     return false;
 
                 let selected = parent.querySelector('[data-selected]');
+                let option = target.dataset.item;
 
                 settings.beforeSelect
-                    ? settings.beforeSelect(parent, selected.dataset.item)
+                    ? settings.beforeSelect(parent, option)
                     : function() {};
 
                 delete selected.dataset.selected;
                 target.dataset.selected = '';
+                current.dataset.item = option;
                 current.children[0].innerText = target.children[0].innerText;
                 current.click();
 
