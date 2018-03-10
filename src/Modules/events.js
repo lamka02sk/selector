@@ -3,20 +3,19 @@ import Instance from '../Modules/instance';
 export default class {
 
     constructor(settings) {
-
         this.Settings = settings;
-
     }
 
     static closeSelector() {
 
         document.addEventListener('click', event => {
 
-            let instances = document.querySelectorAll('.selector-element');
+            const instances = document.querySelectorAll('.selector-element');
 
             instances.forEach(instance => {
                 if(event.target !== instance && !instance.contains(event.target))
-                    instance.querySelector('.selector-options').classList.remove('visible');
+                    instance.querySelectorAll('.selector-options, .selector-selected')
+                        .forEach(element => element.classList.remove('visible'));
             });
 
         });
@@ -29,12 +28,13 @@ export default class {
         const filter = Instance.isFilterType();
         const disabled = parent.matches('[data-disabled]');
 
-        parent.querySelector('.selector-selected').addEventListener('click', () => {
+        parent.querySelector('.selector-selected').addEventListener('click', event => {
 
             if(disabled)
                 return false;
 
             options.classList.toggle('visible');
+            event.currentTarget.classList.toggle('visible');
 
             if(filter) {
 

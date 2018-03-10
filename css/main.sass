@@ -1,34 +1,32 @@
-div.selector-element
+.selector-element
   position: relative
-  display: inline-block
   width: 320px
   height: 38px
-  background: white
-  box-shadow: 0 1px 2px rgba(0,0,0,.05)
-  box-sizing: border-box
-  border: 1px solid silver
-  border-radius: 3px
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif
   font-size: .92rem
-  transition: .2s ease-in-out
 
-  &:hover
-    box-shadow: 0 2px 4px rgba(0,0,0,.1)
-
-
-  div.selector-selected
-    position: relative
-    display: inline-block
-    width: 100%
-    height: 36px
-    cursor: pointer
-    background: white
+  *
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif
     box-sizing: border-box
+
+  .selector-selected
+    width: 100%
+    height: 38px
+    cursor: pointer
+    background: #fff
+    box-shadow: 0 1px 2px rgba(0,0,0,.05)
     padding: 0 28px 0 11px
+    border: 1px solid silver
+    border-radius: 6px
     transition: .2s ease-in-out
+
+    &.visible
+      background: #fbfbfb
+      border-radius: 6px 6px 0 0
+      transition: none
 
     &:hover
       background: #fbfbfb
+      box-shadow: 0 2px 4px rgba(0,0,0,.1)
 
     &:after
       content: ''
@@ -51,10 +49,10 @@ div.selector-element
       overflow: hidden
 
 
-  div.selector-options
+  .selector-options
     position: absolute
     top: 100%
-    left: -1px
+    left: 0
     display: none
     width: 100%
     height: auto
@@ -62,17 +60,15 @@ div.selector-element
     overflow: auto
     z-index: 99
     border: 1px solid silver
-    background: white
+    border-top: 0
+    border-radius: 0 0 6px 6px
+    background: #fff
     box-shadow: 0 2px 4px rgba(0,0,0,.1)
-    border-bottom:
-      left-radius: 3px
-      right-radius: 3px
       
     &.visible
       display: inline-block
 
-    div.selector-filter
-      position: -webkit-sticky
+    .selector-filter
       position: sticky
       top: 0
       width: 100%
@@ -85,11 +81,9 @@ div.selector-element
         height: 100%
         outline: none
         border: none
-        background: white url('../img/search.svg') left 11px center no-repeat
+        background: #fff url('../img/search.svg') left 11px center no-repeat
         background-size: 18px
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif
         font-size: .8rem
-        box-sizing: border-box
         padding: 0 36px
 
       .selector-filter-clear
@@ -107,16 +101,12 @@ div.selector-element
         &:hover
           opacity: 1
 
-    div.selector-group
-      display: inline-block
-      position: relative
+    .selector-group
       float: left
       width: 100%
       border-bottom: 3px solid silver
 
-      span.group-text
-        display: inline-block
-        position: -webkit-sticky
+      .group-text
         position: sticky
         top: 0
         float: left
@@ -127,7 +117,6 @@ div.selector-element
         font-weight: 600
         background: #fbfbfb
         color: #6b6b6b
-        box-sizing: border-box
         padding: 0 11px
         overflow: hidden
         white-space: nowrap
@@ -138,19 +127,17 @@ div.selector-element
         opacity: .6
         cursor: not-allowed
 
-        div.selector-option
+        .selector-option
           opacity: .6
           cursor: not-allowed
 
-    div.selector-option
-      position: relative
+    .selector-option
       display: none
       width: 100%
       height: 32px
-      background: white
-      border-bottom: 1px solid #dddddd
+      background: #fff
+      border-bottom: 1px solid #ddd
       cursor: pointer
-      box-sizing: border-box
       transition: .2s ease-in-out
 
       &:hover
@@ -163,12 +150,11 @@ div.selector-element
       &.show
         display: inline-block
 
-      span.option-text
+      .option-text
         display: inline-block
         width: 100%
         line-height: 32px
         font-size: .85rem
-        box-sizing: border-box
         padding: 0 11px
 
       &:last-of-type
@@ -178,7 +164,7 @@ div.selector-element
         opacity: .6
         cursor: not-allowed
 
-  &[data-type="find"] span.group-text, &[data-type="search"] span.group-text
+  &[data-type="find"] .group-text, &[data-type="search"] .group-text
     top: 33px !important
 
   &[data-disabled]
@@ -189,8 +175,8 @@ div.selector-element
       box-shadow: inherit
 
 
-    div.selector-selected
+    .selector-selected
       cursor: not-allowed
 
       &:hover
-        background: white
+        background: #fff

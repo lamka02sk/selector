@@ -114,25 +114,20 @@ export default class Render {
     renderSelected() {
 
         let selected = this._render.querySelector('.selector-selected');
-
-        if(this.Settings.label)
-            selected.children[0].innerText = this.Settings.label;
-        else if(this._element.dataset.label)
-            selected.children[0].innerText = this._element.dataset.label;
-
         let selectedOption = this._element.querySelector('[selected]');
 
         if(selectedOption) {
-
             selected.dataset.item = selectedOption.value;
             selected.children[0].innerText = selectedOption.innerText;
-
         } else {
-
-            selected.dataset.item = undefined;
+            selected.dataset.item = null;
             selected.children[0].innerText = '---';
-
         }
+
+        if(this._element.dataset.label)
+            selected.children[0].innerText = this._element.dataset.label;
+        else if(this.Settings.label)
+            selected.children[0].innerText = this.Settings.label;
 
     }
 
