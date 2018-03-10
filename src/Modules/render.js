@@ -1,12 +1,12 @@
-import Instance from '../Modules/instance';
 import Events from '../Modules/events';
 
 export default class Render {
 
-    constructor(element, settings) {
+    constructor(element, settings, instance) {
 
         this.Settings = settings;
-        this.Events = new Events(settings);
+        this.Events = new Events(settings, instance);
+        this.Instance = instance;
         this._element = element;
         this.hideOrigin();
 
@@ -22,7 +22,7 @@ export default class Render {
 
     renderParent() {
 
-        let template = Instance.parentTemplate.cloneNode(true);
+        let template = this.Instance.parentTemplate.cloneNode(true);
 
         template.id = this._element.id;
         template.dataset.reference = this._element.name;
@@ -40,7 +40,7 @@ export default class Render {
 
         this.Events.showOptions(options, this._render);
 
-        if(Instance.isFilterType()) {
+        if(this.Instance.isFilterType()) {
 
             const filterRender = this.renderSearch();
             options.appendChild(filterRender);
@@ -64,7 +64,7 @@ export default class Render {
 
         });
 
-        if(Instance.isFilterType())
+        if(this.Instance.isFilterType())
             this.Events.createIndex(options);
 
         this.Events.select(this._render);
@@ -73,16 +73,16 @@ export default class Render {
 
     renderSearch() {
 
-        if(Instance.filterTemplate === undefined)
-            Instance.createFilterElement();
+        if(!this.Instance.filterTemplate)
+            this.Instance.createFilterElement();
 
-        return Instance.filterTemplate.cloneNode(true);
+        return this.Instance.filterTemplate.cloneNode(true);
 
     }
 
     renderGroup(element) {
 
-        let template = Instance.groupTemplate.cloneNode(true);
+        let template = this.Instance.groupTemplate.cloneNode(true);
         template.dataset.group = template.children[0].innerText = element.label;
         element.disabled ? template.dataset.disabled = true : '';
 
@@ -96,7 +96,7 @@ export default class Render {
 
     renderOption(element) {
 
-        let template = Instance.optionTemplate.cloneNode(true);
+        let template = this.Instance.optionTemplate.cloneNode(true);
 
         Object.keys(element.dataset).forEach(attribute => {
             template.dataset[attribute] = element.dataset[attribute];
@@ -146,6 +146,8 @@ export default class Render {
             : data.callback
                 ? data.callback()
                 : (function() {})();
+
+        return this._render;
 
     }
 

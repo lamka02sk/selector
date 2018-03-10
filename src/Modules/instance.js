@@ -1,34 +1,33 @@
 import Render from '../Modules/render';
-import Events from '../Modules/events';
 
-export default {
-
-    parentTemplate: undefined,
-    selectedTemplate: undefined,
-    groupTemplate: undefined,
-    optionsTemplate: undefined,
-    optionTemplate: undefined,
-    filterTemplate: undefined,
+export default class {
 
     constructor(element, settings) {
+
+        this.parentTemplate = null;
+        this.selectedTemplate = null;
+        this.groupTemplate = null;
+        this.optionsTemplate = null;
+        this.optionTemplate = null;
+        this.filterTemplate = null;
 
         this.Settings = settings;
         this.element = element;
         this.createElements();
 
-        let renderer = new Render(element, settings);
+        let renderer = new Render(element, settings, this);
         renderer.renderParent();
         renderer.renderContent();
         renderer.renderSelected();
-        renderer.show();
+        this.render = renderer.show();
 
-    },
+        return this;
+
+    }
 
     isFilterType() {
-
         return (this.Settings.type === 'filter' || (this.element.getAttribute('data-type') || '').match(/(search)|(find)/));
-
-    },
+    }
 
     createElement(tagName, attributes) {
 
@@ -40,7 +39,7 @@ export default {
 
         return element;
 
-    },
+    }
 
     createElements() {
 
@@ -53,7 +52,7 @@ export default {
         this.parentTemplate.appendChild(this.selectedTemplate);
         this.parentTemplate.appendChild(this.optionsTemplate);
 
-    },
+    }
 
     createParentElement() {
 
@@ -64,7 +63,7 @@ export default {
             'id': ''
         });
 
-    },
+    }
 
     createSelectedElement() {
 
@@ -78,7 +77,7 @@ export default {
             })
         );
 
-    },
+    }
 
     createGroupElement() {
 
@@ -93,7 +92,7 @@ export default {
             })
         );
 
-    },
+    }
 
     createOptionsElement() {
 
@@ -101,7 +100,7 @@ export default {
             'class': 'selector-options'
         });
 
-    },
+    }
 
     createOptionElement() {
 
@@ -116,7 +115,7 @@ export default {
             })
         );
 
-    },
+    }
 
     createFilterElement() {
 
@@ -139,6 +138,16 @@ export default {
             })
         );
 
+    }
+
+    enable() {
+        this.element.disabled = false;
+        this.render.removeAttribute('data-disabled');
+    }
+
+    disable() {
+        this.element.disabled = true;
+        this.render.dataset.disabled = '';
     }
 
 };

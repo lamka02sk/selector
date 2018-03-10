@@ -1,9 +1,8 @@
-import Instance from '../Modules/instance';
-
 export default class {
 
-    constructor(settings) {
+    constructor(settings, instance) {
         this.Settings = settings;
+        this.Instance = instance;
     }
 
     static closeSelector() {
@@ -25,12 +24,11 @@ export default class {
     showOptions(options, parent) {
 
         const data = this.Settings.data;
-        const filter = Instance.isFilterType();
-        const disabled = parent.matches('[data-disabled]');
+        const filter = this.Instance.isFilterType();
 
         parent.querySelector('.selector-selected').addEventListener('click', event => {
 
-            if(disabled)
+            if(parent.matches('[data-disabled]') || this.Instance.render.hasAttribute('data-disabled'))
                 return false;
 
             options.classList.toggle('visible');

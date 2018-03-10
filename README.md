@@ -1,19 +1,19 @@
-# selector v3.16
+# selector v3.1.0
 > Makes selects great again
 
 When it comes to selects, many people just don't care and use default one. Sometimes it's fine, but if you need more
 customization, search and beautiful select, you need to use something else.
-This is **selector**. A *small* and yet very *powerful* select plugin. Built with webpack and ES6. Only **2.9KB**
+This is **selector**. A *small* and yet very *powerful* select plugin. Built with webpack and ES6. Only **3.2KB**
 gzipped!
 
 ## Features
 - Fully customizable
 - Lifecycle hooks and events
 - Blazingly fast search feature thanks to options indexing
-- Very small, only 2.9KB gzipped
+- Very small, only 3.2KB minified + gzipped
 - Easy to install and use with npm or yarn
 - Works with webpack
-- Fully compatibile with version 2! Check selector v2 for compatibile methods
+- Fully compatible with version 2! Check selector v2 for compatible methods
 
 ## How to install selector?
 ### npm and yarn
@@ -26,10 +26,10 @@ Then just require it in your project and you are good to go!
 ### CDN
 In case you prefer using CDN services over hosting libraries locally, there is a option to use it.
 ```html
-<script src="https://cdn.jsdelivr.net/npm/selector3@3/dist/theme.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/selector3@3/dist/selector.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/selector3/dist/theme.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/selector3/dist/selector.js"></script>
 or both at once
-<script src="https://cdn.jsdelivr.net/npm/selector3@3/dist/bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/selector3/dist/bundle.js"></script>
 ```
 
 ### Add files manually
@@ -144,7 +144,7 @@ new Selector({
 ```
 
 #### `beforeDestroy` hook
-Before instance is destroyed
+Before instance is destroyed with `destroy()` instance method.
 ```javascript
 new Selector({
     element: 'select.my-class',
@@ -155,7 +155,7 @@ new Selector({
 ```
 
 #### `destroyed` hook
-After element instance is actually destroyed.
+After element instance is actually destroyed with `destroy()` instance method.
 ```javascript
 new Selector({
     element: 'select.my-class',
@@ -191,3 +191,24 @@ or using `data-type` attribute:
     <option value="1">Option 2</option>
 </select>
 ```
+
+### New in 3.1
+#### `disabled` option
+It is now simple to disable selector instance by setting this option to true. If you don't want to apply disable rule
+for every element at the beginning, use rather instance methods `enable(element)` and `disable(element)`. The `element`
+parameter is optional if you want to enable/disable all selects. If you only need to affect single select you need to
+specify which select should be affected. See example below for more.
+```javascript
+let instance = new Selector({
+    element: 'select.my-class, .my-another-select',
+    disabled: true
+});
+
+// Query element we want to disable (NOTE that we are querying the original select element)
+// Also, don't use .querySelectorAll, it won't work at all!
+let disableElement = document.querySelector('select.my-class');
+
+instance.enable();
+instance.disable(disableElement);
+```
+
