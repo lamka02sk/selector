@@ -24,7 +24,6 @@ export default class {
     showOptions(options, parent) {
 
         const data = this.Settings.data;
-        const filter = this.Instance.isFilterType();
 
         parent.querySelector('.selector-selected').addEventListener('click', event => {
 
@@ -34,89 +33,15 @@ export default class {
             options.classList.toggle('visible');
             event.currentTarget.classList.toggle('visible');
 
-            if(filter) {
-
-                const input = parent.querySelector('input');
-
-                input.focus();
-                input.value = '';
-                input.oninput();
-
-            }
-
             options.classList.contains('visible')
                 ? data.closed
                     ? data.closed()
-                    : data.onClose
-                        ? data.onClose()
-                        : (function() {})()
+                    : (function() {})()
                 : data.opened
                     ? data.opened()
-                    : data.onOpen
-                        ? data.onOpen()
-                        : (function() {})();
+                    : (function() {})();
 
         });
-
-    }
-
-    clearFilter(button, input) {
-        
-        button.addEventListener('click', () => {
-            input.value = '';
-            input.oninput();
-        });
-
-    }
-
-    filterOptions(filter, parent) {
-
-        let inputElement = filter.querySelector('input');
-        let options = parent.querySelector('.selector-options');
-        this.clearFilter(filter.querySelector('span'), inputElement);
-
-        this.createIndex(options);
-
-        inputElement.oninput = () => {
-
-            const input = inputElement.value.trim().toLowerCase();
-            let optionsList = options.querySelectorAll('.selector-option');
-
-            JSON.parse(options.dataset.index).forEach((option, index) => {
-
-                if(option[0].indexOf(input) !== -1 || option[1].indexOf(input) !== -1)
-                    optionsList[index].classList.add('show');
-                else
-                    optionsList[index].classList.remove('show');
-
-            });
-
-        };
-
-        inputElement.onkeyup = event => {
-
-            if(event.keyCode && event.keyCode === 13) {
-
-                let options = parent.querySelectorAll('.selector-option.show');
-
-                if(options.length !== 1)
-                    return false;
-
-                options[0].click();
-
-            }
-
-        };
-
-    }
-
-    createIndex(options) {
-
-        let index = Array.from(options.querySelectorAll('.selector-option')).map(option => {
-            return [option.children[0].innerText.toLowerCase(), option.dataset.item.toLowerCase()];
-        });
-
-        options.dataset.index = JSON.stringify(index);
 
     }
 
@@ -142,10 +67,6 @@ export default class {
                 let selected = parent.querySelector('[data-selected]');
                 let option = target.dataset.item;
 
-                settings.beforeSelect
-                    ? settings.beforeSelect(parent, option)
-                    : function() {};
-
                 delete selected.dataset.selected;
                 target.dataset.selected = '';
                 current.dataset.item = option;
@@ -157,9 +78,7 @@ export default class {
 
                 settings.selected
                     ? settings.selected(parent, target.dataset.item)
-                    : settings.onSelect
-                        ? settings.onSelect(parent, target)
-                        : function() {};
+                    : function() {};
 
             }
 

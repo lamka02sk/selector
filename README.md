@@ -1,35 +1,36 @@
-# selector v3
+# selector Lite v3
 > Makes selects great again
 
 When it comes to selects, many people just don't care and use default one. Sometimes it's fine, but if you need more
-customization, search and beautiful select, you need to use something else.
-This is **selector**. A *small* and yet very *powerful* select plugin. Built with webpack and ES6. Only **3.2KB**
+customization and beautiful select, you need to use something else. And yes, it is small and fast, no useless features.
+This is **selector**. A *small* and yet very *powerful* select plugin. Built with webpack and ES6. Only **2.5KB**
 gzipped!
+
+> **WARNING: ** This version is not compatible with selector 2.0!
 
 ## Features
 - Fully customizable
 - Lifecycle hooks and events
 - Blazingly fast search feature thanks to options indexing
-- Very small, only 3.25KB minified + gzipped
+- Very small, only 2.5KB minified + gzipped
 - Easy to install and use with npm or yarn
 - Works with webpack
-- Fully compatible with version 2! Check selector v2 for compatible methods
 
 ## How to install selector?
 ### npm and yarn
 ```javascript
-npm install selector3 --save-dev
-yarn add selector3 --dev
+npm install selector3@lite --save-dev
+yarn add selector3@lite --dev
 ```
 Then just require it in your project and you are good to go!
 
 ### CDN
 In case you prefer using CDN services over hosting libraries locally, there is a option to use it.
 ```html
-<script src="https://cdn.jsdelivr.net/npm/selector3/dist/theme.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/selector3/dist/selector.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/selector3@lite/dist/theme.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/selector3@lite/dist/selector.js"></script>
 or both at once
-<script src="https://cdn.jsdelivr.net/npm/selector3/dist/bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/selector3@lite/dist/bundle.js"></script>
 ```
 
 ### Add files manually
@@ -73,17 +74,6 @@ new Selector({
 });
 ```
 
-#### `beforeCreate` hook
-This hook method is exetuted before selector instance is rendered and ready to use.
-```javascript
-new Selector({
-    element: 'select.my-class',
-    beforeCreate() {
-        console.log('Hello world!');
-    }
-});
-```
-
 #### `created` hook
 This hook method is exetuted when selector instance is rendered and ready to use.
 ```javascript
@@ -113,19 +103,6 @@ new Selector({
     element: 'select.my-class',
     closed() {
         console.log('Closed!');
-    }
-});
-```
-
-#### `beforeSelect` event
-Called before value of original `select` is actually changed.
-`instanceElement` is generated selector parent element
-`selectedItem` is value of selected `option`
-```javascript
-new Selector({
-    element: 'select.my-class',
-    beforeSelect(instanceElement, selectedItem) {
-        console.log('beforeSelect!');
     }
 });
 ```
@@ -174,45 +151,6 @@ new Selector({
 });
 ```
 
-#### `type` option
-Type of selector. At the moment selector has two types: `normal` and `filter`.
-You don't have to provide this option except you want filter inside your selector. Default option is `normal`.
-If you want to use filter only in some instances, use `data-type` attribute with value `find` or `search` instead.
-```javascript
-new Selector({
-    element: 'select.my-class',
-    type: 'filter'
-});
-```
-or using `data-type` attribute:
-```html
-<select name="selector" id="selector" data-type="search">
-    <option value="0" selected>Option 1</option>
-    <option value="1">Option 2</option>
-</select>
-```
-
-### New in 3.1
-#### `disabled` option
-It is now simple to disable selector instance by setting this option to true. If you don't want to apply disable rule
-for every element at the beginning, use rather instance methods `enable(element)` and `disable(element)`. The `element`
-parameter is optional if you want to enable/disable all selects. If you only need to affect single select you need to
-specify which select should be affected. See example below for more.
-```javascript
-let instance = new Selector({
-    element: 'select.my-class, .my-another-select',
-    disabled: true
-});
-
-// Query element we want to disable (NOTE that we are querying the original select element)
-// Also, don't use .querySelectorAll, it won't work at all!
-let disableElement = document.querySelector('select.my-class');
-
-instance.enable();
-instance.disable(disableElement);
-```
-
-### New in 3.2
 #### `identifier` option
 If you need to use more selector instances on single page, you can use identifier option to distinguish between these
 instances in DOM. If this option is set, every element in instance has `data-identifier` attribute with given value.

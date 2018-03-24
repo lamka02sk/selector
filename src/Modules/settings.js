@@ -8,37 +8,19 @@ export default class {
 
         this.data = {
 
-            // v2.0
-            selector: null,
-            callback: null,
-            onOpen: null,
-            onClose: null,
-            onSelect: null,
-            destroy: null,
+            element: null,
+            created: null,
+            opened: null,
+            closed: null,
+            selected: null,
 
-            // v3.0
-            element: null,              // Alongside "selector"
-            created: null,              // Alongside "callback"
-            opened: null,               // Alongside "onOpen"
-            closed: null,               // Alongside "onClose"
-            selected: null,             // Alongside "onSelect"
-
-            beforeCreate: null,
             beforeDestroy: null,
             destroyed: null,
-            beforeSelect: null,
 
             label: null,
-            type: null,
-            disabled: false,
             identifier: null,
             cover: false,
             relative: false,
-
-            // v4.0
-            //watch: true,
-            //beforeUpdate: null,
-            //updated: null,            // Prepared for v4
 
         };
 

@@ -10,14 +10,6 @@ module.exports = class {
 
     }
 
-    enable(element = null) {
-        Core.enable(element);
-    }
-
-    disable(element = null) {
-        Core.disable(element);
-    }
-
     destroy() {
         Core.destroy();
     }

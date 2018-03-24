@@ -25,10 +25,6 @@ export default class {
 
     }
 
-    isFilterType() {
-        return (this.Settings.type === 'filter' || (this.element.getAttribute('data-type') || '').match(/(search)|(find)/));
-    }
-
     createElement(tagName, attributes) {
 
         let element = document.createElement(tagName);
@@ -59,7 +55,6 @@ export default class {
         this.parentTemplate = this.createElement('div', {
             'class': 'selector-element',
             'data-reference': '',
-            'data-type': '',
             'id': ''
         });
 
@@ -126,7 +121,6 @@ export default class {
         this.filterTemplate.appendChild(
             this.createElement('input', {
                 'class': 'selector-filter-input',
-                'type': 'search',
                 'data-placeholder': 'SELECTOR_FILTER_PLACEHOLDER',
                 'placeholder': 'Filter options'
             })
@@ -138,16 +132,6 @@ export default class {
             })
         );
 
-    }
-
-    enable() {
-        this.element.disabled = false;
-        this.render.removeAttribute('data-disabled');
-    }
-
-    disable() {
-        this.element.disabled = true;
-        this.render.dataset.disabled = '';
     }
 
 };

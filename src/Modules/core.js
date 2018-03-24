@@ -41,9 +41,6 @@ export default {
 
         });
 
-        if(this.Settings.data.disabled)
-            this.disable();
-
         Events.closeSelector();
 
     },
@@ -54,34 +51,6 @@ export default {
             return false;
 
         return (element.tagName === 'SELECT');
-
-    },
-
-    enable(element) {
-
-        if(!element)
-            this.Settings.data.disabled = false;
-
-        !element
-            ? this.instances.forEach(instance => instance.enable())
-            : this.instances.forEach(instance => {
-                if(instance.element.outerHTML === element.outerHTML)
-                    instance.enable();
-            });
-
-    },
-
-    disable(element) {
-
-        if(!element)
-            this.Settings.data.disabled = true;
-
-        !element
-            ? this.instances.forEach(instance => instance.disable())
-            : this.instances.forEach(instance => {
-                if(instance.element.outerHTML === element.outerHTML)
-                    instance.disable();
-            });
 
     },
 

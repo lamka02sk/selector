@@ -27,7 +27,6 @@ export default class Render {
 
         template.id = this._element.id;
         template.dataset.reference = this._element.name;
-        template.dataset.type = data.type || this._element.dataset.type || 'default';
         this._element.disabled ? template.dataset.disabled = true : '';
 
         if(data.identifier) {
@@ -50,14 +49,6 @@ export default class Render {
 
         this.Events.showOptions(options, this._render);
 
-        if(this.Instance.isFilterType()) {
-
-            const filterRender = this.renderSearch();
-            options.appendChild(filterRender);
-            this.Events.filterOptions(filterRender, this._render);
-
-        }
-
         Array.from(this._element.children).forEach(child => {
 
             const tagName = child.tagName;
@@ -74,19 +65,7 @@ export default class Render {
 
         });
 
-        if(this.Instance.isFilterType())
-            this.Events.createIndex(options);
-
         this.Events.select(this._render);
-
-    }
-
-    renderSearch() {
-
-        if(!this.Instance.filterTemplate)
-            this.Instance.createFilterElement();
-
-        return this.Instance.filterTemplate.cloneNode(true);
 
     }
 
@@ -145,18 +124,11 @@ export default class Render {
     show() {
 
         const data = this.Settings;
-
-        data.beforeCreate
-            ? data.beforeCreate()
-            : (function() {})();
-
         this._element.parentNode.insertBefore(this._render, this._element.nextSibling);
 
         data.created
             ? data.created()
-            : data.callback
-                ? data.callback()
-                : (function() {})();
+            : (function() {})();
 
         return this._render;
 
