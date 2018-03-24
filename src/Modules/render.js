@@ -4,7 +4,7 @@ export default class Render {
 
     constructor(element, settings, instance) {
 
-        this.Settings = settings;
+        this.Settings = settings.data;
         this.Events = new Events(settings, instance);
         this.Instance = instance;
         this._element = element;
@@ -23,12 +23,19 @@ export default class Render {
     renderParent() {
 
         let template = this.Instance.parentTemplate.cloneNode(true);
+        const data = this.Settings;
 
         template.id = this._element.id;
         template.dataset.reference = this._element.name;
-        template.dataset.type = this.Settings.type || this._element.dataset.type || 'default';
+        template.dataset.type = data.type || this._element.dataset.type || 'default';
         this._element.disabled ? template.dataset.disabled = true : '';
 
+        if(data.identifier) {
+            template.dataset.identifier = data.identifier;
+            this._element.setAttribute('data-identifier', data.identifier);
+        }
+
+        data.relative ? template.classList.add('relative') : '';
         this._render = template;
 
     }
@@ -37,6 +44,9 @@ export default class Render {
 
         let result;
         let options = this._render.querySelector('.selector-options');
+
+        if(this.Settings.cover)
+            options.classList.add('cover');
 
         this.Events.showOptions(options, this._render);
 
@@ -115,6 +125,7 @@ export default class Render {
 
         let selected = this._render.querySelector('.selector-selected');
         let selectedOption = this._element.querySelector('[selected]');
+        const data = this.Settings;
 
         if(selectedOption) {
             selected.dataset.item = selectedOption.value;
@@ -126,14 +137,14 @@ export default class Render {
 
         if(this._element.dataset.label)
             selected.children[0].innerText = this._element.dataset.label;
-        else if(this.Settings.label)
-            selected.children[0].innerText = this.Settings.label;
+        else if(data.label)
+            selected.children[0].innerText = data.label;
 
     }
 
     show() {
 
-        const data = this.Settings.data;
+        const data = this.Settings;
 
         data.beforeCreate
             ? data.beforeCreate()

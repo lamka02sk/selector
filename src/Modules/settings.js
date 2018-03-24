@@ -9,34 +9,36 @@ export default class {
         this.data = {
 
             // v2.0
-            selector: null,             // DONE
-            callback: null,             // DONE
-            onOpen: null,               // DONE
-            onClose: null,              // DONE
-            onSelect: null,             // DONE
-            destroy: null,              // DONE
+            selector: null,
+            callback: null,
+            onOpen: null,
+            onClose: null,
+            onSelect: null,
+            destroy: null,
 
             // v3.0
-            element: null,              // Alongside "selector"     DONE
-            created: null,              // Alongside "callback"     DONE
-            opened: null,               // Alongside "onOpen"       DONE
-            closed: null,               // Alongside "onClose"      DONE
-            selected: null,             // Alongside "onSelect"     DONE
-            //updated: null,            // Prepared for v4
+            element: null,              // Alongside "selector"
+            created: null,              // Alongside "callback"
+            opened: null,               // Alongside "onOpen"
+            closed: null,               // Alongside "onClose"
+            selected: null,             // Alongside "onSelect"
 
-            beforeCreate: null,         // DONE
-            beforeDestroy: null,        // DONE
-            destroyed: null,            // DONE
-            beforeSelect: null,         // DONE
-            //beforeUpdate: null,       // Prepared for v4
+            beforeCreate: null,
+            beforeDestroy: null,
+            destroyed: null,
+            beforeSelect: null,
 
-            label: null,                // DONE
-            type: null,                 // DONE
-            disabled: false,            // DONE
+            label: null,
+            type: null,
+            disabled: false,
             identifier: null,
             cover: false,
             relative: false,
-            //watch: true               // Prepared for v4
+
+            // v4.0
+            //watch: true,
+            //beforeUpdate: null,
+            //updated: null,            // Prepared for v4
 
         };
 

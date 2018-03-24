@@ -10,7 +10,7 @@ gzipped!
 - Fully customizable
 - Lifecycle hooks and events
 - Blazingly fast search feature thanks to options indexing
-- Very small, only 3.2KB minified + gzipped
+- Very small, only 3.25KB minified + gzipped
 - Easy to install and use with npm or yarn
 - Works with webpack
 - Fully compatible with version 2! Check selector v2 for compatible methods
@@ -212,3 +212,31 @@ instance.enable();
 instance.disable(disableElement);
 ```
 
+### New in 3.2
+#### `identifier` option
+If you need to use more selector instances on single page, you can use identifier option to distinguish between these
+instances in DOM. If this option is set, every element in instance has `data-identifier` attribute with given value.
+```javascript
+let instance = new Selector({
+    element: 'select.my-class',
+    identifier: 'firstInstance'
+});
+```
+
+#### `cover` option
+If set to `true` opened options cover selected item box.
+```javascript
+let instance = new Selector({
+    element: 'select.my-class',
+    cover: true
+});
+```
+
+#### `relative` option
+If set to `true` dropdown is relative positioned.
+```javascript
+let instance = new Selector({
+    element: 'select.my-class',
+    relative: true
+});
+```

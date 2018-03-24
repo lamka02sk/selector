@@ -64,6 +64,11 @@
     border-radius: 0 0 6px 6px
     background: #fff
     box-shadow: 0 2px 4px rgba(0,0,0,.1)
+
+    &.cover
+      top: 0
+      border-radius: 6px
+      border-top: 1px solid silver
       
     &.visible
       display: inline-block
@@ -163,6 +168,13 @@
       &[data-disabled]
         opacity: .6
         cursor: not-allowed
+
+  &.relative
+    height: auto
+
+    .selector-options
+      position: relative
+      top: 0
 
   &[data-type="find"] .group-text, &[data-type="search"] .group-text
     top: 33px !important
