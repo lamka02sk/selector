@@ -1,4 +1,4 @@
-# selector v3.1.0
+# selector v3
 > Makes selects great again
 
 When it comes to selects, many people just don't care and use default one. Sometimes it's fine, but if you need more
