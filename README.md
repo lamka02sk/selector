@@ -6,7 +6,7 @@ customization and beautiful select, you need to use something else. And yes, it 
 This is **selector**. A *small* and yet very *powerful* select plugin. Built with webpack and ES6. Only **2.5KB**
 gzipped!
 
-> **WARNING: ** This version is not compatible with selector 2.0!
+## **WARNING: ** This version is not compatible with selector 2.0!
 
 ## Features
 - Fully customizable
