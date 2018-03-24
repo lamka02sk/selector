@@ -11,7 +11,6 @@ gzipped!
 ## Features
 - Fully customizable
 - Lifecycle hooks and events
-- Blazingly fast search feature thanks to options indexing
 - Very small, only 2.5KB minified + gzipped
 - Easy to install and use with npm or yarn
 - Works with webpack
