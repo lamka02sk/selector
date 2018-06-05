@@ -1,3 +1,5 @@
+**⚠️ WARNING:** This repository is moved to Gitlab (https://gitlab.com/lamka02sk/selector) and no longer updated here.
+
 # selector v3
 > Makes selects great again
 
