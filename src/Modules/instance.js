@@ -1,56 +1,54 @@
-import Render from '../Modules/render';
+import Render from './render'
 
 export default class {
 
     constructor(element, settings) {
 
-        this.parentTemplate = null;
-        this.selectedTemplate = null;
-        this.groupTemplate = null;
-        this.optionsTemplate = null;
-        this.optionTemplate = null;
-        this.filterTemplate = null;
+        this.parentTemplate = null
+        this.selectedTemplate = null
+        this.groupTemplate = null
+        this.optionsTemplate = null
+        this.optionTemplate = null
+        this.filterTemplate = null
 
-        this.Settings = settings;
-        this.element = element;
-        this.createElements();
+        this.Settings = settings
+        this.element = element
+        this.createElements()
 
-        let renderer = new Render(element, settings, this);
-        renderer.renderParent();
-        renderer.renderContent();
-        renderer.renderSelected();
-        this.render = renderer.show();
-
-        return this;
+        let renderer = new Render(element, settings, this)
+        renderer.renderParent()
+        renderer.renderContent()
+        renderer.renderSelected()
+        this.render = renderer.show()
 
     }
 
     isFilterType() {
-        return (this.Settings.type === 'filter' || (this.element.getAttribute('data-type') || '').match(/(search)|(find)/));
+        return (this.Settings.type === 'filter' || (this.element.getAttribute('data-type') || '').match(/(search)|(find)/))
     }
 
     createElement(tagName, attributes) {
 
-        let element = document.createElement(tagName);
+        let element = document.createElement(tagName)
 
         Object.keys(attributes).forEach(attribute => {
-            element.setAttribute(attribute, attributes[attribute]);
-        });
+            element.setAttribute(attribute, attributes[attribute])
+        })
 
-        return element;
+        return element
 
     }
 
     createElements() {
 
-        this.createParentElement();
-        this.createSelectedElement();
-        this.createGroupElement();
-        this.createOptionsElement();
-        this.createOptionElement();
+        this.createParentElement()
+        this.createSelectedElement()
+        this.createGroupElement()
+        this.createOptionsElement()
+        this.createOptionElement()
 
-        this.parentTemplate.appendChild(this.selectedTemplate);
-        this.parentTemplate.appendChild(this.optionsTemplate);
+        this.parentTemplate.appendChild(this.selectedTemplate)
+        this.parentTemplate.appendChild(this.optionsTemplate)
 
     }
 
@@ -61,7 +59,7 @@ export default class {
             'data-reference': '',
             'data-type': '',
             'id': ''
-        });
+        })
 
     }
 
@@ -69,13 +67,13 @@ export default class {
 
         this.selectedTemplate = this.createElement('div', {
             'class': 'selector-selected'
-        });
+        })
 
         this.selectedTemplate.appendChild(
             this.createElement('p', {
                 'class': 'selected-text'
             })
-        );
+        )
 
     }
 
@@ -84,13 +82,13 @@ export default class {
         this.groupTemplate = this.createElement('div', {
             'class': 'selector-group',
             'data-group': ''
-        });
+        })
 
         this.groupTemplate.appendChild(
             this.createElement('span', {
                 'class': 'group-text'
             })
-        );
+        )
 
     }
 
@@ -98,7 +96,7 @@ export default class {
 
         this.optionsTemplate = this.createElement('div', {
             'class': 'selector-options'
-        });
+        })
 
     }
 
@@ -107,13 +105,13 @@ export default class {
         this.optionTemplate = this.createElement('div', {
             'class': 'selector-option show',
             'data-item': ''
-        });
+        })
 
         this.optionTemplate.appendChild(
             this.createElement('span', {
                 'class': 'option-text'
             })
-        );
+        )
 
     }
 
@@ -121,7 +119,7 @@ export default class {
 
         this.filterTemplate = this.createElement('div', {
             'class': 'selector-filter'
-        });
+        })
 
         this.filterTemplate.appendChild(
             this.createElement('input', {
@@ -130,24 +128,24 @@ export default class {
                 'data-placeholder': 'SELECTOR_FILTER_PLACEHOLDER',
                 'placeholder': 'Filter options'
             })
-        );
+        )
 
         this.filterTemplate.appendChild(
             this.createElement('span', {
                 'class': 'selector-filter-clear'
             })
-        );
+        )
 
     }
 
     enable() {
-        this.element.disabled = false;
-        this.render.removeAttribute('data-disabled');
+        this.element.disabled = false
+        this.render.removeAttribute('data-disabled')
     }
 
     disable() {
-        this.element.disabled = true;
-        this.render.dataset.disabled = '';
+        this.element.disabled = true
+        this.render.dataset.disabled = ''
     }
 
-};
+}

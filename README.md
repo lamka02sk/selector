@@ -1,21 +1,19 @@
-**⚠️ WARNING:** This repository is moved to Gitlab (https://gitlab.com/lamka02sk/selector) and no longer updated here.
-
-# selector v3
+# selector v4
 > Makes selects great again
 
 When it comes to selects, many people just don't care and use default one. Sometimes it's fine, but if you need more
 customization, search and beautiful select, you need to use something else.
-This is **selector**. A *small* and yet very *powerful* select plugin. Built with webpack and ES6. Only **3.2KB**
-gzipped!
+This is **selector**. A *small* yet very *powerful* select plugin. Built with Vite and modern JS. Only **4.2KB**
+gzipped (CSS and icons included)!
 
 ## Features
 - Fully customizable
 - Lifecycle hooks and events
 - Blazingly fast search feature thanks to options indexing
-- Very small, only 3.25KB minified + gzipped
+- Very small, only 4.2KB minified + gzipped, including CSS theme and icons!
 - Easy to install and use with npm or yarn
-- Works with webpack
-- Fully compatible with version 2! Check selector v2 for compatible methods
+- Built with Vite
+- Fully compatible with version 2 and 3! Check selector v2/v3 for compatible methods
 
 ## How to install selector?
 ### npm and yarn
@@ -24,19 +22,11 @@ npm install selector3 --save-dev
 yarn add selector3 --dev
 ```
 Then just require it in your project and you are good to go!
-
-### CDN
-In case you prefer using CDN services over hosting libraries locally, there is a option to use it.
-```html
-<script src="https://cdn.jsdelivr.net/npm/selector3/dist/theme.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/selector3/dist/selector.js"></script>
-or both at once
-<script src="https://cdn.jsdelivr.net/npm/selector3/dist/bundle.js"></script>
 ```
 
 ### Add files manually
-If you don't use any package manager and build tools, you can still download `dist/` files manually and include them
-in your HTML.
+If you don't use any package manager or build tools, you can still download `dist/` folder manually and include them
+in your HTML. Just remember that the `main.js` file needs `type="module"` attribute to work.
 
 ## How to use it?
 It's pretty simple. You don't have to be genius to use this library. Anyone can!
@@ -55,24 +45,24 @@ and JS:
 ```javascript
 new Selector({
     element: '#selector'
-});
+})
 ```
 
 ### Options, methods and hooks
 #### `element` option
 Defined element where selector initializes. It has to be `select` HTML element, otherwise it won't initialize.
-Whether you can define it as string selector or pass the actual element in it. jQuery instance is **NOT** supported.
+Whether you can define it as string selector or pass the actual element in it.
 ```javascript
 new Selector({
     element: 'select.my-class'
-});
+})
 ```
 or
 ```javascript
-const selectElements = document.querySelectorAll('select');
+const selectElements = document.querySelectorAll('select')
 new Selector({
     element: selectElements
-});
+})
 ```
 
 #### `beforeCreate` hook
@@ -83,7 +73,7 @@ new Selector({
     beforeCreate() {
         console.log('Hello world!');
     }
-});
+})
 ```
 
 #### `created` hook
@@ -92,9 +82,9 @@ This hook method is exetuted when selector instance is rendered and ready to use
 new Selector({
     element: 'select.my-class',
     created() {
-        console.log('Hello world!');
+        console.log('Hello world!')
     }
-});
+})
 ```
 
 #### `opened` event
@@ -103,9 +93,9 @@ When user clicks on selector element and opens it.
 new Selector({
     element: 'select.my-class',
     opened() {
-        console.log('Opened!');
+        console.log('Opened!')
     }
-});
+})
 ```
 
 #### `closed` event
@@ -114,9 +104,9 @@ When user clicks on selector element and closes it.
 new Selector({
     element: 'select.my-class',
     closed() {
-        console.log('Closed!');
+        console.log('Closed!')
     }
-});
+})
 ```
 
 #### `beforeSelect` event
@@ -127,9 +117,9 @@ Called before value of original `select` is actually changed.
 new Selector({
     element: 'select.my-class',
     beforeSelect(instanceElement, selectedItem) {
-        console.log('beforeSelect!');
+        console.log('beforeSelect!')
     }
-});
+})
 ```
 
 #### `selected` event
@@ -140,9 +130,9 @@ On option select.
 new Selector({
     element: 'select.my-class',
     selected(instanceElement, selectedItem) {
-        console.log('Selected!');
+        console.log('Selected!')
     }
-});
+})
 ```
 
 #### `beforeDestroy` hook
@@ -151,9 +141,9 @@ Before instance is destroyed with `destroy()` instance method.
 new Selector({
     element: 'select.my-class',
     beforeDestroy() {
-        console.log('I am being destroyed!');
+        console.log('I am being destroyed!')
     }
-});
+})
 ```
 
 #### `destroyed` hook
@@ -162,9 +152,9 @@ After element instance is actually destroyed with `destroy()` instance method.
 new Selector({
     element: 'select.my-class',
     destroyed() {
-        console.log('I am destroyed already!');
+        console.log('I am destroyed already!')
     }
-});
+})
 ```
 
 #### `label` option
@@ -173,7 +163,7 @@ Title of selector displayed when user didn't select any option yet.
 new Selector({
     element: 'select.my-class',
     label: 'My selector'
-});
+})
 ```
 
 #### `type` option
@@ -184,7 +174,7 @@ If you want to use filter only in some instances, use `data-type` attribute with
 new Selector({
     element: 'select.my-class',
     type: 'filter'
-});
+})
 ```
 or using `data-type` attribute:
 ```html
@@ -204,14 +194,14 @@ specify which select should be affected. See example below for more.
 let instance = new Selector({
     element: 'select.my-class, .my-another-select',
     disabled: true
-});
+})
 
 // Query element we want to disable (NOTE that we are querying the original select element)
 // Also, don't use .querySelectorAll, it won't work at all!
-let disableElement = document.querySelector('select.my-class');
+let disableElement = document.querySelector('select.my-class')
 
-instance.enable();
-instance.disable(disableElement);
+instance.enable()
+instance.disable(disableElement)
 ```
 
 ### New in 3.2
@@ -219,26 +209,26 @@ instance.disable(disableElement);
 If you need to use more selector instances on single page, you can use identifier option to distinguish between these
 instances in DOM. If this option is set, every element in instance has `data-identifier` attribute with given value.
 ```javascript
-let instance = new Selector({
+new Selector({
     element: 'select.my-class',
     identifier: 'firstInstance'
-});
+})
 ```
 
 #### `cover` option
 If set to `true` opened options cover selected item box.
 ```javascript
-let instance = new Selector({
+new Selector({
     element: 'select.my-class',
     cover: true
-});
+})
 ```
 
 #### `relative` option
 If set to `true` dropdown is relative positioned.
 ```javascript
-let instance = new Selector({
+new Selector({
     element: 'select.my-class',
     relative: true
-});
+})
 ```

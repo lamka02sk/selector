@@ -5,7 +5,8 @@
 
     <meta charset="utf-8">
     <title>Selector Demo</title>
-    <link rel="stylesheet" href="demo.css">
+
+    <link rel="stylesheet" href="css/demo.css">
 
 </head>
 
@@ -156,27 +157,27 @@
 
         <h2>Filter selector</h2>
 
-        <select name="filter-select" id="filterSelect" data-label="Filter options" data-type="find">
+        <form action="">
+            <select name="filter-select" id="filterSelect" data-label="Filter options" data-type="find">
 
-            <option value="0" selected>Lorem</option>
-            <option value="1">Ipsum</option>
-            <option value="2">Dolor</option>
-            <option value="3">Sit</option>
-            <option value="4">Amet</option>
+                <option value="0" selected>Lorem</option>
+                <option value="1">Ipsum</option>
+                <option value="2">Dolor</option>
+                <option value="3">Sit</option>
+                <option value="4">Amet</option>
 
-        </select>
+            </select>
+        </form>
 
     </section>
 
-    <!-- Selector assets -->
-    <script src="https://cdn.jsdelivr.net/npm/selector3/dist/bundle.js" type="application/javascript"></script>
-    <!--<script src="./../dist/bundle.js" type="application/javascript"></script>-->
+    <script src="http://localhost:3000/src/main.js" type="module"></script>
 
-    <script>
+    <script type="module">
 
         let selector = new Selector({
             element: 'select'
-        });
+        })
 
     </script>
 

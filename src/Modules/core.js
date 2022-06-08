@@ -1,5 +1,5 @@
-import Instance from '../Modules/instance';
-import Events from '../Modules/events';
+import Instance from './instance'
+import Events from './events'
 
 export default {
 
@@ -7,24 +7,24 @@ export default {
 
     constructor(settings) {
 
-        this.Settings = settings;
-        this.prepareElements();
-        this.render();
+        this.Settings = settings
+        this.prepareElements()
+        this.render()
 
     },
 
     prepareElements() {
 
-        let element = this.Settings.data.element;
+        let element = this.Settings.data.element
 
         if(typeof element === 'string') {
 
-            element = document.querySelectorAll(element);
+            element = document.querySelectorAll(element)
 
-            if(element.length === 0)
-                throw new DOMException;
+            if(!element.length)
+                throw new DOMException
             else
-                this.Settings.set('element', element);
+                this.Settings.set('element', element)
 
         }
 
@@ -35,77 +35,77 @@ export default {
         this.Settings.data.element.forEach(element => {
 
             if(!this.checkElement(element))
-                return false;
+                return
 
-            this.instances.push(new Instance(element, this.Settings));
+            this.instances.push(new Instance(element, this.Settings))
 
-        });
+        })
 
         if(this.Settings.data.disabled)
-            this.disable();
+            this.disable()
 
-        Events.closeSelector();
+        Events.closeSelector()
 
     },
 
     checkElement(element) {
 
         if(!element.nodeType)
-            return false;
+            return false
 
-        return (element.tagName === 'SELECT');
+        return (element.tagName === 'SELECT')
 
     },
 
     enable(element) {
 
         if(!element)
-            this.Settings.data.disabled = false;
+            this.Settings.data.disabled = false
 
         !element
             ? this.instances.forEach(instance => instance.enable())
             : this.instances.forEach(instance => {
                 if(instance.element.outerHTML === element.outerHTML)
-                    instance.enable();
-            });
+                    instance.enable()
+            })
 
     },
 
     disable(element) {
 
         if(!element)
-            this.Settings.data.disabled = true;
+            this.Settings.data.disabled = true
 
         !element
             ? this.instances.forEach(instance => instance.disable())
             : this.instances.forEach(instance => {
                 if(instance.element.outerHTML === element.outerHTML)
-                    instance.disable();
-            });
+                    instance.disable()
+            })
 
     },
 
     destroy() {
 
-        let settings = this.Settings.data;
+        let settings = this.Settings.data
 
         settings.beforeDestroy
             ? settings.beforeDestroy()
-            : function() {};
+            : function() {}
 
         settings.element.forEach(element => {
 
-            let parent = element.parentNode;
-            parent.removeChild(parent.querySelector('[data-reference="' + element.name + '"]'));
+            let parent = element.parentNode
+            parent.removeChild(parent.querySelector('[data-reference="' + element.name + '"]'))
 
-            element.style.display = '';
+            element.style.display = ''
 
-        });
+        })
 
         settings.destroyed
             ? settings.destroyed()
-            : function() {};
+            : function() {}
 
     }
 
-};
+}

@@ -1,7 +1,7 @@
 export default class {
 
     set(property, value) {
-        this.data[property] = value;
+        this.data[property] = value
     }
 
     constructor(settings) {
@@ -35,17 +35,17 @@ export default class {
             cover: false,
             relative: false,
 
-            // v4.0
+            // v4.0 - lol :D
             //watch: true,
             //beforeUpdate: null,
             //updated: null,            // Prepared for v4
 
-        };
+        }
 
         Object.keys(settings).forEach(key => {
-            this.data[key] = settings[key];
-        });
+            this.data[key] = settings[key]
+        })
 
     }
 
-};
+}
